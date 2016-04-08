@@ -200,13 +200,23 @@ namespace pintu
             }
         }
 
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            btn_Start.Enabled = true;
+        }
+
         private void Main_Game_Load(object sender, EventArgs e)
         {
+            /*
             filename = Application.StartupPath + "\\temp.bmp";
             pictureBox1.Image = Image.FromFile(filename);
+            */
             isSwap = false;
             Source = new Bitmap(MAP_WIDTH, MAP_WIDTH);
-            SaveBmp();
+            GameSize = 3;
+            init(GameSize);
+            //SaveBmp();
+
         }
     }
 }
