@@ -82,7 +82,19 @@ namespace pintu
                 }
                 if (CheckWin())
                 {
-                    MessageBox.Show("恭喜过关", "提示");
+                    if (GameSize < 7)
+                    {
+                        MessageBox.Show("恭喜过关", "提示");
+                        GameSize = GameSize + 1;
+                        comboBox1.Text = GameSize.ToString();
+                        label2.Text = comboBox1.Text;
+                        gamestart();
+                    }
+                    if (GameSize == 7)
+                    {
+                        MessageBox.Show("恭喜通关，请选择一张新的图片重新开始", "提示");
+                    }
+                   
                 }
           }
         }
@@ -161,6 +173,11 @@ namespace pintu
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
+            gamestart();
+        }
+
+        private void gamestart()
+        {
             //卸载上次的图片块 
             int i = 0;
             int BWidth = 0;
@@ -200,9 +217,17 @@ namespace pintu
             }
         }
 
+
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             btn_Start.Enabled = true;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String level = comboBox1.Text;
+            label2.Text = level;
+            GameSize = Convert.ToInt32(level);
         }
 
         private void Main_Game_Load(object sender, EventArgs e)
@@ -215,6 +240,13 @@ namespace pintu
             Source = new Bitmap(MAP_WIDTH, MAP_WIDTH);
             GameSize = 3;
             init(GameSize);
+
+            comboBox1.Items.Add("3");
+            comboBox1.Items.Add("4");
+            comboBox1.Items.Add("5");
+            comboBox1.Items.Add("6");
+            comboBox1.Items.Add("7");
+            comboBox1.Text = "3";
             //SaveBmp();
 
         }
